@@ -26,12 +26,12 @@ installChaincode() {
   /etc/hyperledger/bin/peer lifecycle chaincode package "${DIR_PATH}/${CHAINCODE_PATH}.tar.gz" \
   --lang node \
   --path "${DIR_PATH}/${CHAINCODE_PATH}/contract" \
-  --label "$CHAINCODE_NAME"
+  --label "${CHAINCODE_NAME}${CHAINCODE_VERSION}"
   /etc/hyperledger/bin/peer lifecycle chaincode install "${DIR_PATH}/${CHAINCODE_PATH}.tar.gz"
 }
 
-queryInstalled() {
-  PACKAGES=$(/etc/hyperledger/bin/peer lifecycle chaincode queryinstalled | grep "$CHAINCODE_NAME":)
+getChaincodePackageID() {
+  PACKAGES=$(/etc/hyperledger/bin/peer lifecycle chaincode queryinstalled | grep "${CHAINCODE_NAME}${CHAINCODE_VERSION}":)
   PACKAGE_ID=${PACKAGES#*Package ID: }
   export PACKAGE_ID=${PACKAGE_ID%,*}
 
@@ -74,35 +74,29 @@ commitChaincode() {
   --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_2
 }
 
+queryInstalled() {
+  /etc/hyperledger/bin/peer lifecycle chaincode queryinstalled \
+  --output "${OUTPUT}"
+}
+
 queryCommitted() {
   /etc/hyperledger/bin/peer lifecycle chaincode querycommitted -o "$ORDERER_ADDRESS" \
   --channelID "$CHANNEL_ID" \
   --tls \
   --cafile "$ORDERER_CA" \
   --peerAddresses "$CORE_PEER_ADDRESS" \
-  --tlsRootCertFiles "$CORE_PEER_TLS_ROOTCERT_FILE"
-}
-
-queryChannels() {
-  if [[ $PEER == "one" ]]
-  then
-    setPeerOne
-  elif [[ $PEER == "two" ]]
-  then
-    setPeerTwo
-  fi
-
-  /etc/hyperledger/bin/peer channel list
+  --tlsRootCertFiles "$CORE_PEER_TLS_ROOTCERT_FILE" \
+  --output "${OUTPUT}"
 }
 
 install() {
   setPeerOne
   installChaincode
-  queryInstalled
+  getChaincodePackageID
 
   setPeerTwo
   installChaincode
-  queryInstalled
+  getChaincodePackageID
 
   setPeerOne
   approveChaincode
@@ -122,15 +116,29 @@ upgrade() {
   echo "upgrading chaincode to version ${CHAINCODE_VERSION} - sequence ${CHAINCODE_SEQUENCE}"
 }
 
+OUTPUT="plain-text"
+if [[ $PEER == "one" ]]
+then
+  setPeerOne
+elif [[ $PEER == "two" ]]
+then
+  setPeerTwo
+fi
+
 if [[ $ACTION == "install" ]]
 then
   install
 elif [[ $ACTION == "upgrade" ]]
 then
-  upgrade
-elif [[ $ACTION == "queryChannels" ]]
+  install
+elif [[ $ACTION == "queryCommitted" ]]
 then
-  queryChannels
+  OUTPUT="json"
+  queryCommitted
+elif [[ $ACTION == "queryInstalled" ]]
+then
+  OUTPUT="json"
+  queryInstalled
 else
   echo "invalid action ${ACTION}"
 fi
