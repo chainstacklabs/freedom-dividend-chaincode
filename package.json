@@ -4,7 +4,8 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "start": "nodemon --exec babel-node ./app.js"
+        "start": "babel-node ./app.js",
+        "startnodemon": "nodemon --exec babel-node ./app.js"
     },
     "author": "Chainstack",
     "license": "Apache-2.0",

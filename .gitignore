@@ -1,6 +1,11 @@
 .DS_Store
 node_modules
-certs
+
+# fabric
+chaincodes/*
+certs/*
+connection-profile.json
+connection-profile?.json
 
 # local env files
 .env
