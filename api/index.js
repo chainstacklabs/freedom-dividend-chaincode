@@ -5,16 +5,25 @@ const api = express();
 
 api.get('/network', (req, res, next) => {
   // demo bridge between node.js and peer cli bash command
-  execute({ ACTION: 'queryChannels', PEER: 'one' })
-    .then(response => {
-      res.send(response.stdout);
-    }).catch(err => {
-      next(err);
+  const channels = Array.from(gateway.client.channels.keys());
+
+  Promise.all([
+    execute({ ACTION: 'queryInstalled', PEER: 'one' }),
+    execute({ ACTION: 'queryCommitted', PEER: 'one' })
+  ]).then(([installed, committed]) => {
+    res.send({
+      channels,
+      installed_chaincodes: JSON.parse(installed.stdout).installed_chaincodes,
+      chaincode_definitions: JSON.parse(committed.stdout).chaincode_definitions,
     });
+  })
+  .catch(next);
 });
 
 api.post('/chaincode/transaction', async (req, res, next) => {
   try {
+    const channels = Array.from(gateway.client.channels.keys());
+
     const network = await gateway.getNetwork('defaultchannel');
     const contract = await network.getContract(req.body.contract);
     const response = await contract.submitTransaction(...req.body.args);
