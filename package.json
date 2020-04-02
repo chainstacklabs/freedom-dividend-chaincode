@@ -17,9 +17,8 @@
     "dependencies": {
         "body-parser": "^1.19.0",
         "connect-history-api-fallback": "^1.6.0",
-        "del": "^5.1.0",
         "express": "^4.17.1",
-        "fabric-network": "^2.0.0-beta.4",
+        "fabric-network": "^2.0.0-snapshot.351",
         "history": "^4.10.1",
         "js-yaml": "^3.13.1",
         "serve-static": "^1.14.1"

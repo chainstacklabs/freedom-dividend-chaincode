@@ -9,7 +9,7 @@ const connect = async identity => {
   const wallet = await connectWallet();
 
   await gateway.connect(connectionProfile, {
-    identity: 'thomas',
+    identity: 'user01',
     wallet,
     discovery: { enabled: true, asLocalhost: false }
   });
