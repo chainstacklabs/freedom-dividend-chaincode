@@ -7,10 +7,11 @@ const connect = () => Wallets.newFileSystemWallet(path.join(process.cwd(), '/fab
 const register = async identityLabel => {
   try {
     const env = envfile.parseFileSync('.env');
-    const { cert, private_key } = seralizePath(
-      `${process.cwd()}/${env.ADMIN_IDENTITY_1}`,
-    );
-    const mspId = env.CORE_PEER_LOCALMSPID_1;
+
+    const certificate = seralizePath(`${process.cwd()}/${env.ADMIN_CERT}/`);
+    const privateKey = seralizePath(`${process.cwd()}/${env.ADMIN_PRIVATE_KEY}/`);
+    const mspId = env.CORE_PEER_LOCALMSPID;
+
     const wallet = await connect();
 
     const existingIdentity = await wallet.get(identityLabel);
@@ -23,8 +24,8 @@ const register = async identityLabel => {
 
     await wallet.put(identityLabel, {
       credentials: {
-        certificate: cert,
-        privateKey: private_key,
+        certificate,
+        privateKey,
       },
       mspId,
       type: 'X.509',
@@ -35,24 +36,7 @@ const register = async identityLabel => {
   }
 };
 
-// const installChaincode = async identity => {
-//   try {
-//     const gateway = await connect(identity);
-//     const network = await gateway.getNetwork('defaultchannel');
-//     const contract = await network.getContract('freedomDividendV3');
-
-//     return  contract.submitTransaction('querySSN', '286-46-6157');
-//   } catch (error) {
-//     console.log(error);
-//     console.error(`Failed to submit transaction: ${error}`);
-//     process.exit(1);
-//   }
-// };
-
-// Failed to connect to remote gRPC server nd-505-267-963.rg-353-176.int.chainstack.com url:grpcs://nd-505-267-963.rg-353-176.int.chainstack.com:7051 timeout:3000
-
 module.exports = {
-  // installChaincode,
   register,
   connect,
 };

@@ -6,7 +6,7 @@
       dark
     >
       <router-link :to="{ name: 'Main'}">
-        <v-img src="/chainstackLogo.svg" max-width="220"></v-img>
+        <v-img src="/logo.svg" max-width="220"></v-img>
       </router-link>
       <div class="d-flex align-center">
       </div>
@@ -33,12 +33,8 @@
 
 export default {
   name: 'App',
-
-  components: {
+  created() {
+    document.title = 'Fabric V2.0 Webapp';
   },
-
-  data: () => ({
-    //
-  }),
 };
 </script>

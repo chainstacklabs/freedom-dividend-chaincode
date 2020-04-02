@@ -5,7 +5,7 @@ import { connect as connectWallet } from 'fabric/wallet';
 const gateway = new Gateway();
 
 const connect = async identity => {
-  const connectionProfile = seralizePath('./../../connection-profile.json');
+  const connectionProfile = JSON.parse(seralizePath('./../../certs/connection-profile.json'));
   const wallet = await connectWallet();
 
   await gateway.connect(connectionProfile, {
