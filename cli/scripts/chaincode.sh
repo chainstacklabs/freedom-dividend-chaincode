@@ -8,19 +8,10 @@ export ORDERER_CA=$DIR_PATH/$ORDERER_CA
 export ORDERER_ADDRESS=$ORDERER_ADDRESS
 export CORE_PEER_TLS_ENABLED=$CORE_PEER_TLS_ENABLED
 
-setPeerOne() {
-  export CORE_PEER_ADDRESS=$CORE_PEER_ADDRESS_1
-  export CORE_PEER_MSPCONFIGPATH=$DIR_PATH/$CORE_PEER_MSPCONFIGPATH_1
-  export CORE_PEER_LOCALMSPID=$CORE_PEER_LOCALMSPID_1
-  export CORE_PEER_TLS_ROOTCERT_FILE=$DIR_PATH/$CORE_PEER_TLS_ROOTCERT_FILE_1
-}
-
-setPeerTwo() {
-  export CORE_PEER_ADDRESS=$CORE_PEER_ADDRESS_2
-  export CORE_PEER_MSPCONFIGPATH=$DIR_PATH/$CORE_PEER_MSPCONFIGPATH_2
-  export CORE_PEER_LOCALMSPID=$CORE_PEER_LOCALMSPID_2
-  export CORE_PEER_TLS_ROOTCERT_FILE=$DIR_PATH/$CORE_PEER_TLS_ROOTCERT_FILE_2
-}
+export CORE_PEER_ADDRESS=$CORE_PEER_ADDRESS
+export CORE_PEER_MSPCONFIGPATH=$DIR_PATH/$CORE_PEER_MSPCONFIGPATH
+export CORE_PEER_LOCALMSPID=$CORE_PEER_LOCALMSPID
+export CORE_PEER_TLS_ROOTCERT_FILE=$DIR_PATH/$CORE_PEER_TLS_ROOTCERT_FILE
 
 installChaincode() {
   /etc/hyperledger/bin/peer lifecycle chaincode package "${DIR_PATH}/${CHAINCODE_PATH}.tar.gz" \
@@ -37,6 +28,7 @@ getChaincodePackageID() {
 
   echo "PACKAGE_ID:" ${PACKAGE_ID}
 }
+
 
 approveChaincode() {
   /etc/hyperledger/bin/peer lifecycle chaincode approveformyorg \
@@ -68,10 +60,8 @@ commitChaincode() {
   --sequence "$CHAINCODE_SEQUENCE" \
   --tls \
   --cafile "$ORDERER_CA" \
-  --peerAddresses $CORE_PEER_ADDRESS_1 \
-  --peerAddresses $CORE_PEER_ADDRESS_2 \
-  --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_1 \
-  --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_2
+  --peerAddresses $CORE_PEER_ADDRESS \
+  --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE
 }
 
 queryInstalled() {
@@ -90,41 +80,17 @@ queryCommitted() {
 }
 
 install() {
-  setPeerOne
   installChaincode
   getChaincodePackageID
 
-  setPeerTwo
-  installChaincode
-  getChaincodePackageID
-
-  setPeerOne
-  approveChaincode
-  checkReadiness
-
-  setPeerTwo
   approveChaincode
   checkReadiness
 
   commitChaincode
   queryCommitted
-
-  setPeerTwo
-}
-
-upgrade() {
-  echo "upgrading chaincode to version ${CHAINCODE_VERSION} - sequence ${CHAINCODE_SEQUENCE}"
 }
 
 OUTPUT="plain-text"
-if [[ $PEER == "one" ]]
-then
-  setPeerOne
-elif [[ $PEER == "two" ]]
-then
-  setPeerTwo
-fi
-
 if [[ $ACTION == "install" ]]
 then
   install

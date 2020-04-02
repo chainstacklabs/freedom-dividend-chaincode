@@ -6,6 +6,7 @@ certs/*
 connection-profile.json
 connection-profile?.json
 fabric/wallets/*
+chaincodes/*.tar.gz
 
 #wip
 wip/
