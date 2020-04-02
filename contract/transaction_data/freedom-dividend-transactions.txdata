@@ -1,0 +1,44 @@
+[
+    {
+        "transactionName": "freedomDividendExists",
+        "transactionLabel": "A test freedomDividendExists transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "createFreedomDividend",
+        "transactionLabel": "A test createFreedomDividend transaction",
+        "arguments": [
+            "001",
+            "some value"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "readFreedomDividend",
+        "transactionLabel": "A test readFreedomDividend transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "updateFreedomDividend",
+        "transactionLabel": "A test updateFreedomDividend transaction",
+        "arguments": [
+            "001",
+            "some other value"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "deleteFreedomDividend",
+        "transactionLabel": "A test deleteFreedomDividend transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    }
+]
