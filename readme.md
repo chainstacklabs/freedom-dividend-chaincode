@@ -1,12 +1,6 @@
 #### Setup Environment
 - download peer binary on your local machine `sudo bash downloadPeerBinary.sh`
 - download relevant certs to project folder
-- download chaincode/contract to chaincodes folder
-```
-### Example
-$ cd ~/freedom-divided-webapp/chaincodes
-$ git clone https://github.com/akegaviar/freedomDividend.git
-```
 - create .env file base on .env.template *
 - setup repo dependencies with `npm install`
 - start node.js server
