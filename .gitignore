@@ -2,7 +2,6 @@
 node_modules
 
 # fabric
-chaincodes/*
 certs/*
 connection-profile.json
 connection-profile?.json
