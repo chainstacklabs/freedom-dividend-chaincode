@@ -24,13 +24,13 @@ api.post('/chaincode/transaction', async (req, res, next) => {
   try {
     const channels = Array.from(gateway.client.channels.keys());
 
-    const network = await gateway.getNetwork('defaultchannel');
+    const network = await gateway.getNetwork(channels[0]);
     const contract = await network.getContract(req.body.contract);
     const response = await contract.submitTransaction(...req.body.args);
 
     res.send(response.toString());
   } catch(e) {
-    next(e);
+    res.status(500).json(e.message);
   }
 });
 

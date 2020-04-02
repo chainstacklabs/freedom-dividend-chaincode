@@ -1,6 +1,5 @@
 import api from './api';
 import bodyParser from 'body-parser';
-import del from 'del'; // to be remove
 import express from 'express';
 import history from 'connect-history-api-fallback';
 import path from 'path';
@@ -11,10 +10,9 @@ import { connect } from '/fabric/gateway';
 
 const init = async () => {
   unlockScriptFolder();
-  await del(['wallets/thomas.id']);
 
-  await register('thomas');
-  await connect('thomas');
+  await register('user01');
+  await connect('user01');
 }
 
 init();
