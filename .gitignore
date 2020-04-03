@@ -1,0 +1,33 @@
+.DS_Store
+node_modules
+
+# fabric
+certs/*
+connection-profile.json
+connection-profile?.json
+fabric/wallets/*
+chaincodes/*.tar.gz
+
+#wip
+wip/
+
+# local env files
+.env
+.env.local
+.env.*.local
+
+# Log files
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.txt
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
