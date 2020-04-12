@@ -4,21 +4,21 @@ set -e
 trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 
 export FABRIC_CFG_PATH=/etc/hyperledger/config
-export ORDERER_CA=$DIR_PATH/$ORDERER_CA
+export ORDERER_CA=$ROOT_PATH/webapp/certs/$ORDERER_CA
 export ORDERER_ADDRESS=$ORDERER_ADDRESS
 export CORE_PEER_TLS_ENABLED=$CORE_PEER_TLS_ENABLED
 
 export CORE_PEER_ADDRESS=$CORE_PEER_ADDRESS
-export CORE_PEER_MSPCONFIGPATH=$DIR_PATH/$CORE_PEER_MSPCONFIGPATH
+export CORE_PEER_MSPCONFIGPATH=$ROOT_PATH/webapp/certs/$CORE_PEER_MSPCONFIGPATH
 export CORE_PEER_LOCALMSPID=$CORE_PEER_LOCALMSPID
-export CORE_PEER_TLS_ROOTCERT_FILE=$DIR_PATH/$CORE_PEER_TLS_ROOTCERT_FILE
+export CORE_PEER_TLS_ROOTCERT_FILE=$ROOT_PATH/webapp/certs/$CORE_PEER_TLS_ROOTCERT_FILE
 
 installChaincode() {
-  /etc/hyperledger/bin/peer lifecycle chaincode package "${DIR_PATH}/${CHAINCODE_PATH}.tar.gz" \
+  /etc/hyperledger/bin/peer lifecycle chaincode package "${ROOT_PATH}/${CHAINCODE_NAME}.tar.gz" \
   --lang node \
-  --path "${DIR_PATH}/${CHAINCODE_PATH}/contract" \
+  --path "${ROOT_PATH}/contract" \
   --label "${CHAINCODE_NAME}${CHAINCODE_VERSION}"
-  /etc/hyperledger/bin/peer lifecycle chaincode install "${DIR_PATH}/${CHAINCODE_PATH}.tar.gz"
+  /etc/hyperledger/bin/peer lifecycle chaincode install "${ROOT_PATH}/${CHAINCODE_NAME}.tar.gz"
 }
 
 getChaincodePackageID() {
@@ -28,7 +28,6 @@ getChaincodePackageID() {
 
   echo "PACKAGE_ID:" ${PACKAGE_ID}
 }
-
 
 approveChaincode() {
   /etc/hyperledger/bin/peer lifecycle chaincode approveformyorg \
@@ -40,6 +39,7 @@ approveChaincode() {
   --version "$CHAINCODE_VERSION" \
   --channelID "$CHANNEL_ID" \
   --sequence "$CHAINCODE_SEQUENCE"
+  # --init-required \
 }
 
 checkReadiness() {
@@ -50,6 +50,7 @@ checkReadiness() {
   --name "$CHAINCODE_NAME" \
   --version "$CHAINCODE_VERSION" \
   --sequence "$CHAINCODE_SEQUENCE"
+  # --init-required \
 }
 
 commitChaincode() {
@@ -62,6 +63,7 @@ commitChaincode() {
   --cafile "$ORDERER_CA" \
   --peerAddresses $CORE_PEER_ADDRESS \
   --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE
+  # --init-required \
 }
 
 queryInstalled() {

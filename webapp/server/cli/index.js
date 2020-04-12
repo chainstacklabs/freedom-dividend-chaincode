@@ -2,16 +2,17 @@ const envfile = require('envfile');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const execFile = util.promisify(require('child_process').execFile);
+const { rootPath } = require('../fabric/utils/helper');
 
-const unlockScriptFolder = () => exec(`chmod -R 777 ${process.cwd()}/cli/scripts`);
+const unlockScriptFolder = () => exec(`chmod -R 777 ${rootPath}/webapp/server/cli/scripts`);
 const execute = ARGS => {
   const args = Object.assign(ARGS, {
-    DIR_PATH: process.cwd(),
+    ROOT_PATH: rootPath,
   });
 
-  return execFile(`${process.cwd()}/cli/scripts/chaincode.sh`, [], {
+  return execFile(`${rootPath}/webapp/server/cli/scripts/chaincode.sh`, [], {
     env: Object.assign(
-      envfile.parseFileSync('.env'),
+      envfile.parseFileSync(`${rootPath}/webapp/server/.env`),
       args,
     ),
   });

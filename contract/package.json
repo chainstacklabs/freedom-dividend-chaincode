@@ -8,6 +8,7 @@
     "npm": ">=5"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "lint": "eslint .",
     "pretest": "npm run lint",
     "test": "nyc mocha --recursive",
@@ -17,18 +18,25 @@
   "author": "Ake Gaviar @Chainstack",
   "license": "MIT",
   "dependencies": {
-    "fabric-contract-api": "^1.4.4",
-    "fabric-shim": "^1.4.4"
+    "debug": "^4.1.1",
+    "fabric-contract-api": "^2.1.0",
+    "fabric-shim": "^2.1.0"
   },
   "devDependencies": {
+    "acorn": "^7.1.1",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "eslint": "^6.3.0",
+    "minimist": "^1.2.5",
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
     "sinon": "^7.4.1",
     "sinon-chai": "^3.3.0",
     "winston": "^3.2.1"
+  },
+  "resolutions": {
+    "acorn": "^7.1.1",
+    "minimist": "^1.2.5"
   },
   "nyc": {
     "exclude": [

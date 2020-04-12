@@ -67,7 +67,8 @@ export default {
     goTo({ references }) {
       if (references) {
         const { name } = this.getDefinition(references);
-        this.$router.push({ name: 'Chaincode', params: { chaincode: name } });
+        this.$router.push({ name: 'Chaincode', params: { chaincode: name } })
+          .catch(() => {});
       }
     },
   },

@@ -8,21 +8,25 @@ import { unlockScriptFolder } from '/cli';
 import { register } from '/fabric/wallet';
 import { connect } from '/fabric/gateway';
 
-const init = async () => {
+const setupFabricWalletAndGateway = async () => {
   unlockScriptFolder();
 
+  // sample implementation of fabric sdk gateway and wallet 
+  console.log('Setting up fabric wallet and gateway...');
   await register('user01');
   await connect('user01');
+  console.log('Set up complete!');
 }
 
-init();
+setupFabricWalletAndGateway();
 const app = express();
 
 const historyMiddleware = history({
   disableDotRule: true,
   verbose: true
 });
-const staticFileMiddleware = express.static(path.join(__dirname + '/dist'));
+
+const staticFileMiddleware = express.static(path.join(__dirname + '/../dist'));
 app.use(staticFileMiddleware);
 app.use((req, res, next) => {
   if (req.path.includes('api/v1/')) {
@@ -31,8 +35,9 @@ app.use((req, res, next) => {
     historyMiddleware(req, res, next);
   }
 });
+app.use(staticFileMiddleware);
 
-app.use(serveStatic(__dirname + '/dist'));
+app.use(serveStatic(__dirname + '/../dist'));
 const port = process.env.PORT || 4000;
 const hostname = 'localhost';
 

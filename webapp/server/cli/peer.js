@@ -1,13 +1,15 @@
+const { rootPath } = require('../fabric/utils/helper');
 const { execute, unlockScriptFolder } = require('./index');
 const envfile = require('envfile');
 const fs = require('fs');
 
-const upgrade = () => {
-  const parsedFile = envfile.parseFileSync('.env');
-  parsedFile.CHAINCODE_VERSION = (parseFloat(parsedFile.CHAINCODE_VERSION) + 0.1).toFixed(1);
-  parsedFile.CHAINCODE_SEQUENCE = parseFloat(parsedFile.CHAINCODE_SEQUENCE) + 1;
+// set .env CONTRACT_VERSION and CONTRACT_SEQUENCE
+const setContractVersion = (upgrade = false) => {
+  const parsedFile = envfile.parseFileSync(`${rootPath}/webapp/server/.env`);
+  parsedFile.CHAINCODE_VERSION = upgrade ? (parseFloat(parsedFile.CHAINCODE_VERSION) + 0.1).toFixed(1) : 1.0;
+  parsedFile.CHAINCODE_SEQUENCE = upgrade ? parseFloat(parsedFile.CHAINCODE_SEQUENCE) + 1 : 1;
 
-  fs.writeFileSync('./.env', envfile.stringifySync(parsedFile));
+  fs.writeFileSync(`${rootPath}/webapp/server/.env`, envfile.stringifySync(parsedFile));
 };
 
 const main = async () => {
@@ -21,9 +23,13 @@ const main = async () => {
   console.log(`executing cli - ${action} command`);
 
   unlockScriptFolder();
+
+  if (action === 'install') {
+    setContractVersion(false);
+  }
   
   if (action === 'upgrade') {
-    upgrade();
+    setContractVersion(true);
   }
 
   execute({ ACTION: action })

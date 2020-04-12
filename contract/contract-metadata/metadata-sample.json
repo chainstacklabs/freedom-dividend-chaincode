@@ -1,0 +1,92 @@
+{
+  "$schema": "https://fabric-shim.github.io/master/contract-schema.json",
+  "contracts": {
+    "FreedomDividendContract": {
+      "name": "FreedomDividendContract",
+      "contractInstance": {
+        "name": "FreedomDividendContract",
+        "default": true
+      },
+      "transactions": [
+        {
+          "name": "optIn",
+          "tags": [
+            "submitTx"
+          ],
+          "parameters": [
+            {
+              "name": "ssnId",
+              "description": "SSN ID",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "description",
+              "description": "description",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        {
+          "name": "optOut",
+          "tags": [
+            "submitTx"
+          ],
+          "parameters": [
+            {
+              "name": "ssnId",
+              "description": "SSN ID",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        {
+          "name": "querySSN",
+          "tags": [
+            "submitTx"
+          ],
+          "parameters": [
+            {
+              "name": "ssnId",
+              "description": "SSN ID",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "info": {
+        "title": "",
+        "version": ""
+      }
+    },
+    "org.hyperledger.fabric": {
+      "name": "org.hyperledger.fabric",
+      "contractInstance": {
+        "name": "org.hyperledger.fabric"
+      },
+      "transactions": [
+        {
+          "name": "GetMetadata"
+        }
+      ],
+      "info": {
+        "title": "",
+        "version": ""
+      }
+    }
+  },
+  "info": {
+    "version": "1.0.2",
+    "title": "freedomDividendContract"
+  },
+  "components": {
+    "schemas": {}
+  }
+}

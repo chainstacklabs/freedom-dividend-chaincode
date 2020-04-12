@@ -9,6 +9,7 @@ import '@mdi/font/css/materialdesignicons.css';
 axios.defaults.baseURL = '/api/v1';
 axios.defaults.withCredentials = true;
 
+window.$eventHub = new Vue();
 Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;

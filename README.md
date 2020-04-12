@@ -1,42 +1,36 @@
-#### Setup Environment
-- download peer binary on your local machine `sudo bash downloadPeerBinary.sh`
-- download relevant certs to project folder
-- create .env file base on .env.template *
-- setup repo dependencies with `npm install`
-- start node.js server
-```
-// Start node.js Server
-$ npm run start
-// Or start server with nodemon (requires nodemon to be installed on your local machine)
-// npm i nodemon -g
-$ npm run startnodemon
-```
-#### setup chaincode on fabric network
-- install chaincode via bash script on network `node cli/peer install`
-- upgrade chaincode via bash script on network `node cli/peer upgrade`
-  - ensure chaincode binary has been updated
-  - version and sequence will be automatically updated
+# Freedom dividend chaincode
 
-#### chaincode interaction via node.js api endpoint
-Submit chaincode transaction
-```
-curl --location --request POST 'http://localhost:4000/api/v1/chaincode/transaction' \
---header 'Content-Type: application/json' \
---data-raw '{
-  "contract": "freedomDividendV6",
-  "args": ["optIn", "286-46-6159", "Word"]
-}'
-```
-Query chaincode
-```
-curl --location --request POST 'http://localhost:4000/api/v1/chaincode/transaction' \
---header 'Content-Type: application/json' \
---data-raw '{
-  "contract": "freedomDividendV5",
-  "args": [ "querySSN", "286-46-6159" ]
-}'
-```
-Query network details
-```
-curl --location --request GET 'http://localhost:4000/api/v1/network'
-```
+A starter template for building a complete fabric application using Node.js and Vue.js with some included packages and configurations to help jump-start the development process.
+
+There are two parts of this project, webapp and [contract](https://docs.chainstack.com/tutorials/fabric/universal-basic-income-opt-in-chaincode#universal-basic-income-opt-in-chaincode) and each part is contained in its own respective folder.
+
+Major packages inlcuded and configured (as required)
+
+## Contract
+- includes a sample javascript chaincode with 3 transactions
+  - optIn
+  - optOut
+  - querySSN 
+- more [information](https://docs.chainstack.com/tutorials/fabric/universal-basic-income-opt-in-chaincode#universal-basic-income-opt-in-chaincode)
+
+## Webapp
+
+### Backend
+
+#### Highlights
+* includes bash script that automates peer chaincode lifecycle for installing and upgrading chaincodes.
+* includes api endpoint to bridge node.js and fabric network using bash script
+* includes sample implementation of fabric sdk v2.1 for creating gateway and wallets
+
+[Build Setup](./webapp/server/README.md)
+
+By default this application is configured to work out of the box with a fabric network deployed on Chainstack, but by
+doing minor changes you can easily switch to a network deployed on your local machine.
+
+### Frontend
+
+#### Highlights
+* automatically retrieves and display installed packages and chaincode from backend
+* automatically generates forms base on installed chaincode
+
+[Build Setup](./webapp/client/README.md)

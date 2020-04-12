@@ -12,19 +12,17 @@
       </div>
 
       <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://docs.chainstack.com/tutorials/fabric/universal-basic-income-opt-in-chaincode"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Documentation</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <v-content>
       <router-view></router-view>
+      <v-snackbar
+        v-model="showAlert"
+        :color="alertMessage.type"
+        :timeout=3000
+      >
+        {{ alertMessage.message }}
+      </v-snackbar>
     </v-content>
   </v-app>
 </template>
@@ -33,8 +31,28 @@
 
 export default {
   name: 'App',
+
+  data() {
+    return {
+      showAlert: false,
+      alertMessage: {},
+    };
+  },
+
   created() {
-    document.title = 'Fabric V2.0 Webapp';
+    document.title = 'Fabric V2.1 Webapp';
+    window.$eventHub.$on('showAlert', this.showAlertSnackBar);
+  },
+
+  beforeDestroy() {
+    window.$eventHub.$off('showAlert');
+  },
+
+  methods: {
+    showAlertSnackBar(alert) {
+      this.alertMessage = alert;
+      this.showAlert = true;
+    },
   },
 };
 </script>
