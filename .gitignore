@@ -10,6 +10,7 @@
 *.sw?
 *.sw?
 *.tgz
+*.tar.gz
 
 .cache
 .DS_Store
@@ -43,8 +44,8 @@ typings/
 yarn-error.log*
 
 # farbric
-certs/*
+certs
+wallets
 chaincodes/*.tar.gz
 connection-profile.json
 connection-profile?.json
-fabric/wallets/*
