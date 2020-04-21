@@ -11,7 +11,7 @@ import { connect } from '/fabric/gateway';
 const setupFabricWalletAndGateway = async () => {
   unlockScriptFolder();
 
-  // sample implementation of fabric sdk gateway and wallet 
+  // sample implementation of Fabric SDK gateway and wallet 
   console.log('Setting up fabric wallet and gateway...');
   await register('user01');
   await connect('user01');

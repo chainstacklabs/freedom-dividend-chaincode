@@ -6,9 +6,9 @@
 - [nodemon](https://nodemon.io/)
 
 ## Add Required .env File
-create personalized .env using webapp/sever/.env.template
+create personalized .env using webapp/server/.env.template
 
-The demo is setup with a fabric network deployed on Chainstack, you can edit the `AS_LOCALHOST`, `Orderer details`, `Admin` values in the `.env` file to have it work with a network deployed on your local machine.
+The demo is setup with a Fabric network deployed on Chainstack, you can edit `AS_LOCALHOST`, `Orderer details`, `Admin` values in the `.env` file to have it work with a network deployed on your local machine.
 ```
 AS_LOCALHOST=false
 FABRIC_CFG_PATH=/etc/hyperledger/config

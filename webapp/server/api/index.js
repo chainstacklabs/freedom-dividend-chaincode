@@ -4,7 +4,7 @@ import { execute } from 'cli';
 const api = express();
 
 api.get('/network', (req, res, next) => {
-  // demo bridge between node.js and peer cli bash command
+  // demo bridge between Node.js and Peer cli bash command
   const channels = Array.from(gateway.client.channels.keys());
 
   Promise.all([
