@@ -47,9 +47,6 @@ sudo bash downloadPeerBinary.sh
 
 ### linux
 sudo bash downloadPeerBinary.sh linux
-
-### windows
-sudo bash downloadPeerBinary.sh windows
 ```
 
 ### Step 2: install dependencies

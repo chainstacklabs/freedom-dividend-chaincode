@@ -5,10 +5,7 @@ export FABRIC_BIN_PATH=${FABRIC_PATH}/bin
 export FABRIC_CFG_PATH=${FABRIC_PATH}/config
 export FABRIC_SOURCES_PATH=${FABRIC_PATH}/sources
 
-if [[ $1 == "windows" ]]
-then
-  export FABRIC_BINARY_FILE="hyperledger-fabric-windows-amd64-${FABRIC_VERSION}.tar.gz"
-elif [[ $1 == "linux" ]]
+if [[ $1 == "linux" ]]
 then
   export FABRIC_BINARY_FILE="hyperledger-fabric-linux-amd64-${FABRIC_VERSION}.tar.gz"
 else
