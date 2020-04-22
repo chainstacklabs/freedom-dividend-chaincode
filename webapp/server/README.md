@@ -12,7 +12,7 @@ Create a personalized `.env` using `webapp/server/.env.template`.
 
 The demo is set up with a Hyperledger Fabric v2 network deployed on Chainstack, you can edit `AS_LOCALHOST`, `Orderer details`, `Admin` values in the `.env` file to have it work with a network deployed on your local machine.
 
-```
+```bash
 AS_LOCALHOST=false
 FABRIC_CFG_PATH=/etc/hyperledger/config
 
@@ -42,20 +42,20 @@ CORE_PEER_TLS_ROOTCERT_FILE=/{MSP_ID}/peers/{NODE_ID}.{ORG_ID}.int.chainstack.co
 
 ### Step 1: install Hyperledger Fabric binaries
 
-```
+```bash
 sudo bash downloadPeerBinary.sh
 ```
 
 ### Step 2: install dependencies
 
-```
+```bash
 cd /webapp/server
 npm install
 ```
 
 ### Step 3: start Node.js server
 
-```
+```bash
 ### nodemon
 npm run dev
 
@@ -65,13 +65,13 @@ npm run start
 
 ### Step 4: install chaincode
 
-```
+```bash
 node /webapp/server/cli/peer install
 ```
 
 ## Step 5: upgrade chaincode
 
-```
+```bash
 node /webapp/server/cli/peer upgrade
 ```
 

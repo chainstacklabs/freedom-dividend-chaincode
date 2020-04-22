@@ -1,5 +1,6 @@
 {
-  "name": "client",
+  "name": "fabricWebApp",
+  "description": "Fabric web app frontend application",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,6 +8,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "author": "Thomas Lee @Chainstack",
+  "license": "MIT",
   "dependencies": {
     "@mdi/font": "^3.6.95",
     "axios": "^0.19.2",
