@@ -1,14 +1,17 @@
-# Backend
+# Back end
 
-## Install prerequiste
+## Install prerequistes
+
 - Node.js, version 12 - V12.13.1 and higher
 - NPM tool version 6 or higher
 - [nodemon](https://nodemon.io/)
 
-## Add Required .env File
-create personalized .env using webapp/server/.env.template
+## Add the required .env file
 
-The demo is setup with a Fabric network deployed on Chainstack, you can edit `AS_LOCALHOST`, `Orderer details`, `Admin` values in the `.env` file to have it work with a network deployed on your local machine.
+Create a personalized `.env` using `webapp/server/.env.template`.
+
+The demo is set up with a Hyperledger Fabric v2 network deployed on Chainstack, you can edit `AS_LOCALHOST`, `Orderer details`, `Admin` values in the `.env` file to have it work with a network deployed on your local machine.
+
 ```
 AS_LOCALHOST=false
 FABRIC_CFG_PATH=/etc/hyperledger/config
@@ -36,9 +39,9 @@ CORE_PEER_TLS_ROOTCERT_FILE=/{MSP_ID}/peers/{NODE_ID}.{ORG_ID}.int.chainstack.co
 
 ```
 
-## Build Setup
+## Build setup
 
-### Step 1: install fabric binaries
+### Step 1: install Hyperledger Fabric binaries
 
 ```
 sudo bash downloadPeerBinary.sh
@@ -51,7 +54,7 @@ cd /webapp/server
 npm install
 ```
 
-### Step 3: start nodejs server
+### Step 3: start Node.js server
 
 ```
 ### nodemon
@@ -62,11 +65,15 @@ npm run start
 ```
 
 ### Step 4: install chaincode
+
 ```
 node /webapp/server/cli/peer install
 ```
 
 ## Step 5: upgrade chaincode
+
 ```
 node /webapp/server/cli/peer upgrade
 ```
+
+See also the [detailed web app tutorial](https://chainstack.com/deploy-a-hyperledger-fabric-v2-web-app-using-sdk-for-node-js/).
