@@ -2,8 +2,8 @@
   <v-app>
     <v-app-bar
       app
-      color="primary"
       dark
+      color="primary"
     >
       <router-link :to="{ name: 'Main'}">
         <v-img src="/logo.svg" max-width="220"></v-img>
@@ -19,7 +19,7 @@
       <v-snackbar
         v-model="showAlert"
         :color="alertMessage.type"
-        :timeout=3000
+        :timeout="3000"
       >
         {{ alertMessage.message }}
       </v-snackbar>
@@ -40,7 +40,7 @@ export default {
   },
 
   created() {
-    document.title = 'Fabric V2.1 Webapp';
+    document.title = 'Fabric v2.1 web app';
     window.$eventHub.$on('showAlert', this.showAlertSnackBar);
   },
 

@@ -7,10 +7,10 @@
             v-for="(parameter, index) in transaction.parameters"
             :key="index">
             <v-text-field
+              required
               v-model="values[parameter.name]"
               :rules="[(v) => !!v || `${parameter.name} is required`]"
               :label="parameter.description"
-              required
             ></v-text-field>
           </v-col>
           <v-btn :disabled="!valid" color="primary" class="mr-4" @click="submit" :loading="loading">
@@ -21,13 +21,13 @@
     </v-form>
 
     <v-textarea
-      v-if="response"
       class="mt-2"
       clearable
       outlined
+      v-if="response"
+      v-model="response"
       :error="isError"
       :success="!isError"
-      v-model="response"
       :label="transaction.name"
     ></v-textarea>
   </div>

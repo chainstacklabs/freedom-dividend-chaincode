@@ -14,12 +14,12 @@
     <v-card class="mx-auto">
       <v-list class="pa-0">
         <v-list-group
+          no-action
+          disabled
+          append-icon
           v-for="(item, index) in network.installed_chaincodes"
           value="true"
           :key="index"
-          no-action
-          disabled
-          append-icon=""
           :class="{ disable_link: !item.references }"
           :ripple="item.references !== undefined"
         >
@@ -84,7 +84,6 @@ export default {
 
     width: 100%;
     padding: 10px;
-    // padding-left: 8px;
   }
 
   .disable_link {
