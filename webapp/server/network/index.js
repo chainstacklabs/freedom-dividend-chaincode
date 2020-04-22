@@ -42,7 +42,7 @@ const main = async () => {
   }
 
   unlockScriptFolder();
-  
+
   if (action === 'install') {
     await install();
   }

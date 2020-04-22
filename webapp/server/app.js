@@ -11,7 +11,7 @@ import { connect } from '/fabric/gateway';
 const setupFabricWalletAndGateway = async () => {
   unlockScriptFolder();
 
-  // sample implementation of Fabric SDK gateway and wallet 
+  // sample implementation of Fabric SDK gateway and wallet
   console.log('Setting up fabric wallet and gateway...');
   await register('user01');
   await connect('user01');
@@ -42,7 +42,7 @@ const port = process.env.PORT || 4000;
 const hostname = 'localhost';
 
 app.use(bodyParser.json());
-app.use('/api/v1', api); 
+app.use('/api/v1', api);
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);

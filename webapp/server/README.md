@@ -1,9 +1,9 @@
 # Back end
 
-## Install prerequistes
+## Install prerequisites
 
-- Node.js, version 12 - V12.13.1 and higher
-- NPM tool version 6 or higher
+- Node.js version 12.13.1 and higher
+- NPM version 6 or higher
 - [nodemon](https://nodemon.io/)
 
 ## Add the required .env file
@@ -36,7 +36,6 @@ CORE_PEER_ADDRESS={CORE_PEER_ADDRESS}:7051
 CORE_PEER_MSPCONFIGPATH=/{MSP_ID}/users/Admin@{ORG_ID}.int.chainstack.com/msp/
 CORE_PEER_LOCALMSPID={CORE_PEER_LOCALMSPID}
 CORE_PEER_TLS_ROOTCERT_FILE=/{MSP_ID}/peers/{NODE_ID}.{ORG_ID}.int.chainstack.com/tls/ca.crt
-
 ```
 
 ## Build setup

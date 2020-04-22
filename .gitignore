@@ -43,7 +43,7 @@ pids
 typings/
 yarn-error.log*
 
-# farbric
+# fabric
 certs
 wallets
 chaincodes/*.tar.gz

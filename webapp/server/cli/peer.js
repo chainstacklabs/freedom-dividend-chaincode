@@ -27,7 +27,7 @@ const main = async () => {
   if (action === 'install') {
     setContractVersion(false);
   }
-  
+
   if (action === 'upgrade') {
     setContractVersion(true);
   }
@@ -45,4 +45,3 @@ const main = async () => {
 
 
 main();
-
