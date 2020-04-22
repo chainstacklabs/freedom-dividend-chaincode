@@ -34,7 +34,7 @@ doing minor changes you can easily switch to a network deployed on your local ma
 
 #### Highlights
 
-- Automatically retrieves and displays the installed packages and chaincode from the back end.
+- Automatically retrieves and displays the installed packages and chaincode from the backend.
 - Automatically generates forms based on installed chaincode.
 
 [Build Setup](./webapp/client/README.md)

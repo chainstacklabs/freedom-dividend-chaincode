@@ -1,4 +1,4 @@
-# Back end
+# Backend
 
 ## Install prerequisites
 
