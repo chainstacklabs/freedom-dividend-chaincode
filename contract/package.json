@@ -28,10 +28,10 @@
     "chai-as-promised": "^7.1.1",
     "eslint": "^6.3.0",
     "minimist": "^1.2.5",
-    "mocha": "^6.2.0",
+    "mocha": "^6.2.3",
     "nyc": "^14.1.1",
     "sinon": "^7.4.1",
-    "sinon-chai": "^3.3.0",
+    "sinon-chai": "^3.5.0",
     "winston": "^3.2.1"
   },
   "resolutions": {
