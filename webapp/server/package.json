@@ -9,7 +9,7 @@
         "dev": "nodemon --exec babel-node ./app.js"
     },
     "author": "Chainstack",
-    "license": "Apache-2.0",
+    "license": "MIT",
     "engines": {
         "node": ">=8",
         "npm": ">=5"
