@@ -4,7 +4,16 @@ export FABRIC_PATH=/etc/hyperledger
 export FABRIC_BIN_PATH=${FABRIC_PATH}/bin
 export FABRIC_CFG_PATH=${FABRIC_PATH}/config
 export FABRIC_SOURCES_PATH=${FABRIC_PATH}/sources
-export FABRIC_BINARY_FILE=hyperledger-fabric-darwin-amd64-${FABRIC_VERSION}.tar.gz
+
+if [[ $1 == "windows" ]]
+then
+  export FABRIC_BINARY_FILE="hyperledger-fabric-windows-amd64-${FABRIC_VERSION}.tar.gz"
+elif [[ $1 == "linux" ]]
+then
+  export FABRIC_BINARY_FILE="hyperledger-fabric-linux-amd64-${FABRIC_VERSION}.tar.gz"
+else
+  export FABRIC_BINARY_FILE="hyperledger-fabric-darwin-amd64-${FABRIC_VERSION}.tar.gz"
+fi
 
 mkdir -p ${FABRIC_SOURCES_PATH}  # Also creates FABRIC_PATH
 wget -q https://github.com/hyperledger/fabric/releases/download/v${FABRIC_VERSION}/${FABRIC_BINARY_FILE} -O - \

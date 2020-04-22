@@ -22,20 +22,19 @@ ORDERER_ADDRESS={ORDERER_ADDRESS}:7050
 
 # Chaincode
 CHANNEL_ID=defaultchannel
-CHAINCODE_PATH=contract
 CHAINCODE_NAME=freedomDividend
 CHAINCODE_VERSION=1.0
 CHAINCODE_SEQUENCE=1
 
 # Admin
-ADMIN_CERT=/{MSP_ID}/users/Admin@{ORG_ID}.int.chainstack.com/msp/admincerts/Admin@{ORG_ID}.int.chainstack.com-cert.pem
-ADMIN_PRIVATE_KEY=/{MSP_ID}/users/Admin@{ORG_ID}.int.chainstack.com/msp/keystore/priv_sk
+ADMIN_CERT=/{MSP_ID}/users/Admin@{ORG_ID}.p2pify.com/msp/admincerts/Admin@{ORG_ID}.p2pify.com-cert.pem
+ADMIN_PRIVATE_KEY=/{MSP_ID}/users/Admin@{ORG_ID}.p2pify.com/msp/keystore/priv_sk
 
 CORE_PEER_TLS_ENABLED=true
 CORE_PEER_ADDRESS={CORE_PEER_ADDRESS}:7051
-CORE_PEER_MSPCONFIGPATH=/{MSP_ID}/users/Admin@{ORG_ID}.int.chainstack.com/msp/
+CORE_PEER_MSPCONFIGPATH=/{MSP_ID}/users/Admin@{ORG_ID}.p2pify.com/msp/
 CORE_PEER_LOCALMSPID={CORE_PEER_LOCALMSPID}
-CORE_PEER_TLS_ROOTCERT_FILE=/{MSP_ID}/peers/{NODE_ID}.{ORG_ID}.int.chainstack.com/tls/ca.crt
+CORE_PEER_TLS_ROOTCERT_FILE=/{MSP_ID}/peers/{NODE_ID}.{ORG_ID}.p2pify.com/tls/ca.crt
 ```
 
 ## Build setup
@@ -43,7 +42,14 @@ CORE_PEER_TLS_ROOTCERT_FILE=/{MSP_ID}/peers/{NODE_ID}.{ORG_ID}.int.chainstack.co
 ### Step 1: install Hyperledger Fabric binaries
 
 ```bash
+### mac
 sudo bash downloadPeerBinary.sh
+
+### linux
+sudo bash downloadPeerBinary.sh linux
+
+### windows
+sudo bash downloadPeerBinary.sh windows
 ```
 
 ### Step 2: install dependencies
