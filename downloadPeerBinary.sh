@@ -1,5 +1,5 @@
 #!/bin/bash
-export FABRIC_VERSION=2.1.0
+export FABRIC_VERSION=2.2.0
 export FABRIC_PATH=/etc/hyperledger
 export FABRIC_BIN_PATH=${FABRIC_PATH}/bin
 export FABRIC_CFG_PATH=${FABRIC_PATH}/config
