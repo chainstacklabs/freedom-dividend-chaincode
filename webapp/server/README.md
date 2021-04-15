@@ -35,10 +35,10 @@ PEER_NAME=peer0.org1.example.com
 
 ```bash
 ### mac
-sudo bash downloadPeerBinary.sh
+bash downloadPeerBinary.sh
 
 ### linux
-sudo bash downloadPeerBinary.sh linux
+bash downloadPeerBinary.sh linux
 ```
 
 ### Step 2: install dependencies
