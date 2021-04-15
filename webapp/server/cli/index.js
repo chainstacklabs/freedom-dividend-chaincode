@@ -1,24 +1,22 @@
-const envfile = require('envfile');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const execFile = util.promisify(require('child_process').execFile);
-const { rootPath } = require('../fabric/utils/helper');
+const { rootPath, generateCertPath } = require('../fabric/utils/helper');
 
 const unlockScriptFolder = () => exec(`chmod -R 777 ${rootPath}/webapp/server/cli/scripts`);
-const execute = ARGS => {
-  const args = Object.assign(ARGS, {
-    ROOT_PATH: rootPath,
-  });
+const execute = async (ARGS) => {
+  const certs = await generateCertPath();
 
   return execFile(`${rootPath}/webapp/server/cli/scripts/chaincode.sh`, [], {
     env: Object.assign(
-      envfile.parseFileSync(`${rootPath}/webapp/server/.env`),
-      args,
+      certs,
+      ARGS,
     ),
+    maxBuffer: 10 * 1024 * 1024
   });
 };
 
 module.exports = {
-  unlockScriptFolder,
   execute,
+  unlockScriptFolder,
 };

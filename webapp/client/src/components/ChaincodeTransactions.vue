@@ -13,7 +13,13 @@
               :label="parameter.description"
             ></v-text-field>
           </v-col>
-          <v-btn :disabled="!valid" color="primary" class="mr-4" @click="submit" :loading="loading">
+          <v-btn
+            class="mr-4"
+            color="primary"
+            :disabled="!valid"
+            :loading="loading"
+            @click="submit()"
+          >
             {{ transaction.name }}
           </v-btn>
         </v-row>
@@ -79,7 +85,9 @@ export default {
           });
 
           if (data) {
-            this.response = JSON.stringify(data);
+            this.response = decodeURIComponent(data);
+          } else {
+            this.response = null;
           }
           this.reset();
         })

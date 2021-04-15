@@ -19,7 +19,7 @@
       <v-snackbar
         v-model="showAlert"
         :color="alertMessage.type"
-        :timeout="3000"
+        :timeout="10000"
       >
         {{ alertMessage.message }}
       </v-snackbar>
@@ -50,8 +50,10 @@ export default {
 
   methods: {
     showAlertSnackBar(alert) {
-      this.alertMessage = alert;
-      this.showAlert = true;
+      if (alert) {
+        this.alertMessage = alert;
+        this.showAlert = true;
+      }
     },
   },
 };

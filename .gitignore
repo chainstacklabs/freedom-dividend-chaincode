@@ -14,7 +14,6 @@
 
 .cache
 .DS_Store
-.env
 .env.*.local
 .env.local
 .eslintcache
@@ -44,8 +43,10 @@ typings/
 yarn-error.log*
 
 # fabric
-certs
 wallets
+hlf
 chaincodes/*.tar.gz
 connection-profile.json
 connection-profile?.json
+/webapp/certs/*
+!/webapp/certs/README.md

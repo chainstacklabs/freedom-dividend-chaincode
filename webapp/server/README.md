@@ -6,35 +6,27 @@
 - NPM version 6 or higher
 - [nodemon](https://nodemon.io/)
 
-## Add the required .env file
+## Update the .env file
 
-Create a personalized `.env` using `webapp/server/.env.template`.
-
-The demo is set up with a Hyperledger Fabric v2 network deployed on Chainstack, you can edit `AS_LOCALHOST`, `Orderer details`, `Admin` values in the `.env` file to have it work with a network deployed on your local machine.
+The demo is set up with a Hyperledger Fabric v2 network deployed on Chainstack, replace the following values `MSP_ID`, `ORDERER_NAME` and `PEER_NAME` with the Hyperledger Fabric network details from Chainstack console.
 
 ```bash
 AS_LOCALHOST=false
-FABRIC_CFG_PATH=/etc/hyperledger/config
 
-# Orderer details
-ORDERER_CA=/{ORDERER_ID}-cert.pem
-ORDERER_ADDRESS={ORDERER_ADDRESS}:7050
-
-# Chaincode
 CHANNEL_ID=defaultchannel
-CHAINCODE_NAME=freedomDividend
-CHAINCODE_VERSION=1.0
+CHAINCODE_NAME=freedomDividendContract
+CHAINCODE_VERSION=1
 CHAINCODE_SEQUENCE=1
 
-# Admin
-ADMIN_CERT=/{MSP_ID}/users/Admin@{ORG_ID}.p2pify.com/msp/admincerts/Admin@{ORG_ID}.p2pify.com-cert.pem
-ADMIN_PRIVATE_KEY=/{MSP_ID}/users/Admin@{ORG_ID}.p2pify.com/msp/keystore/priv_sk
+# Org
+MSP_ID=Org1MSP
 
-CORE_PEER_TLS_ENABLED=true
-CORE_PEER_ADDRESS={CORE_PEER_ADDRESS}:7051
-CORE_PEER_MSPCONFIGPATH=/{MSP_ID}/users/Admin@{ORG_ID}.p2pify.com/msp/
-CORE_PEER_LOCALMSPID={CORE_PEER_LOCALMSPID}
-CORE_PEER_TLS_ROOTCERT_FILE=/{MSP_ID}/peers/{NODE_ID}.{ORG_ID}.p2pify.com/tls/ca.crt
+# Orderer
+ORDERER_NAME=orderer.example.com
+
+# Peer
+PEER_NAME=peer0.org1.example.com
+
 ```
 
 ## Build setup
@@ -65,17 +57,3 @@ npm run dev
 ### node
 npm run start
 ```
-
-### Step 4: install chaincode
-
-```bash
-node /webapp/server/cli/peer install
-```
-
-## Step 5: upgrade chaincode
-
-```bash
-node /webapp/server/cli/peer upgrade
-```
-
-See also the [detailed web app tutorial](https://chainstack.com/deploy-a-hyperledger-fabric-v2-web-app-using-sdk-for-node-js/).
