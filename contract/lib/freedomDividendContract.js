@@ -22,6 +22,7 @@ class FreedomDividendContract extends Contract {
 
     await ctx.stub.putState(ssnId,Buffer.from(JSON.stringify(ssn)));
 
+    console.log('Test');
     console.log('This Social Security number has successfully opted in to Freedom Dividend.');
 
   }

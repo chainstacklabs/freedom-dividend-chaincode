@@ -15,7 +15,7 @@ export CORE_PEER_MSPCONFIGPATH=$MSP_PATH
 export CORE_PEER_TLS_ROOTCERT_FILE=$PEER_TLS_ROOTCERT_FILE
 
 discoverPeers() {
-   ${FABRIC_BIN_PATH}/discover \
+  ${FABRIC_BIN_PATH}/discover \
   --peerTLSCA "$PEER_TLS_ROOTCERT_FILE" \
   --userKey "$ADMIN_PRIVATE_KEY" \
   --userCert "$ADMIN_CERT" \
@@ -132,6 +132,9 @@ then
 elif [[ $ACTION == "install" ]]
 then
   installChaincode
+elif [[ $ACTION == "upgrade" ]]
+then
+    installChaincode
 elif [[ $ACTION == "approve" ]]
 then
   approveChaincode
