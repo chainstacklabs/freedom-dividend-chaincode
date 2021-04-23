@@ -32,7 +32,7 @@
         "@babel/preset-env": "^7.7.7",
         "babel-plugin-module-resolver": "^3.2.0",
         "envfile": "^5.0.0",
-        "jsrsasign": "^8.0.19",
+        "jsrsasign": "^10.2.0",
         "rimraf": "^3.0.2",
         "minimist": "^1.2.5"
     },
