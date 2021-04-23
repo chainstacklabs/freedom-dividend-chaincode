@@ -1,5 +1,16 @@
 <template>
-  <v-container>
+  <v-container class="w-100 h-100" v-if="!loadComplete">
+    <div class="w-100 h-100 d-flex justify-center align-center">
+      <v-progress-circular
+        :size="70"
+        :width="5"
+        color="primary"
+        indeterminate
+      ></v-progress-circular>
+    </div>
+  </v-container>
+  <v-container v-else>
+    <p class="title font-weight-bold">{{ mspId }}</p>
     <div>
       <span class="title font-weight-bold">Chaincode Name: {{ $route.params.chaincode }} </span>
       <v-divider class="my-2"></v-divider>
@@ -22,8 +33,6 @@
       ></ChaincodeTransactions>
     </v-row>
   </v-container>
-
-
 </template>
 
 <script>
@@ -37,10 +46,11 @@ export default {
     ChaincodeTransactions,
   },
 
-  beforeRouteEnter(to, from, next) {
-    axios.get(`/chaincode/${to.params.chaincode}`)
-      .then(({ data: { contracts, info } }) => {
-        next((vm) => vm.fetchChaincode(contracts, info));
+  created() {
+    axios.get(`/chaincode/${this.$route.params.chaincode}`)
+      .then(({ data: { contract: { contracts, info }, mspId } }) => {
+        this.fetchChaincode(contracts, info);
+        this.mspId = mspId;
       })
       .catch((error) => {
         window.$eventHub.$emit('showAlert', {
@@ -48,19 +58,22 @@ export default {
           type: 'error',
         });
 
-        next({ name: 'Main' });
+        this.$router.push({ name: 'Main' });
       });
   },
 
   data: () => ({
     contract: null,
     info: null,
+    mspId: null,
+    loadComplete: false,
   }),
 
   methods: {
     fetchChaincode(contracts, info) {
       this.contract = contracts[Object.keys(contracts).find((key) => key !== 'org.hyperledger.fabric')];
       this.info = info;
+      this.loadComplete = true;
     },
   },
 };

@@ -1,16 +1,13 @@
-const envfile = require('envfile');
 const path = require('path');
 const { Wallets } = require('fabric-network');
-const { rootPath, seralizePath } = require('./utils/helper');
+const { generateCertPath, seralizePath } = require('./utils/helper');
 
 const connect = () => Wallets.newFileSystemWallet(path.join(process.cwd(), '/fabric/wallets'));
 const register = async identityLabel => {
   try {
-    const env = envfile.parseFileSync('.env');
-
-    const certificate = seralizePath(`${rootPath}/webapp/certs/${env.ADMIN_CERT}`);
-    const privateKey = seralizePath(`${rootPath}/webapp/certs/${env.ADMIN_PRIVATE_KEY}`);
-    const mspId = env.CORE_PEER_LOCALMSPID;
+    const { ADMIN_CERT, ADMIN_PRIVATE_KEY, MSP_ID: mspId } = await generateCertPath();
+    const certificate = seralizePath(ADMIN_CERT);
+    const privateKey = seralizePath(ADMIN_PRIVATE_KEY);
 
     const wallet = await connect();
 
