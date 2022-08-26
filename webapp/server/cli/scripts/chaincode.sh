@@ -76,8 +76,8 @@ checkReadiness() {
 }
 
 commitChaincode() {
-  PEER_ADDRESSES_LIST=(${PEER_ADDRESSES}) && 
-  TLS_ROOTCERT_FILES_LIST=(${TLS_ROOTCERT_FILES}) && 
+  PEER_ADDRESSES_LIST=(${PEER_ADDRESSES}) &&
+  TLS_ROOTCERT_FILES_LIST=(${TLS_ROOTCERT_FILES}) &&
   ${FABRIC_BIN_PATH}/peer lifecycle chaincode commit -o "$ORDERER_ADDRESS" \
   --channelID "$CHANNEL_ID" \
   --name "$CHAINCODE_NAME" \
@@ -113,8 +113,8 @@ queryApproved() {
 }
 
 invokeChaincode() {
-  PEER_ADDRESSES_LIST=(${PEER_ADDRESSES}) && 
-  TLS_ROOTCERT_FILES_LIST=(${TLS_ROOTCERT_FILES}) && 
+  PEER_ADDRESSES_LIST=(${PEER_ADDRESSES}) &&
+  TLS_ROOTCERT_FILES_LIST=(${TLS_ROOTCERT_FILES}) &&
   ${FABRIC_BIN_PATH}/peer chaincode invoke -o "$ORDERER_ADDRESS" \
   --tls \
   --cafile "$ORDERER_CA" \

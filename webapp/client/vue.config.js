@@ -9,4 +9,27 @@ module.exports = {
       },
     },
   },
+  configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.s[ac]ss$/i,
+          use: [
+            'sass-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                /* eslint-disable global-require */
+                implementation: require('sass'),
+                /* eslint-enable global-require */
+                sassOptions: {
+                  fiber: false,
+                },
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
 };
